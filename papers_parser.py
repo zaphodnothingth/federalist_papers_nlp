@@ -23,6 +23,7 @@ papers_df = pd.DataFrame(re.findall(
     \n(?P<body>[\s\S]*?)(?=FEDERALIST|\Z)       # everything up to next paper or end of string recorded as body
     """, content_str, re.VERBOSE))
 papers_df.rename({0:'no', 1:'title', 2:'publication', 3:'author', 4:'addressee', 5:'body'}, axis=1, inplace=True)
+papers_df.to_csv("./data/results/papers_df.csv", index=False)
 
 for number, text in zip(papers_df.no, papers_df.body): 
     with open('./data/bodies/{}.txt'.format(number), 'w') as writefile:
